@@ -1,46 +1,109 @@
-# Getting Started with Create React App
+# Enterprise React Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A scalable, enterprise-grade React application built with TypeScript, following modern best practices and architectural patterns.
 
-## Available Scripts
+## 🚀 Quick Start
 
-In the project directory, you can run:
+### Prerequisites
 
-### `npm start`
+- Node.js 18+
+- npm or yarn
+- Git
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Installation
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+# Clone the repository
+git clone <repository-url>
+cd enterprise-react-app
 
-### `npm test`
+# Install dependencies
+npm install
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Set up folder structure
+npm run setup:folders
 
-### `npm run build`
+# Copy environment file
+cp .env.local.example .env.local
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Start development server
+npm start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 📁 Project Structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+src/
+├── assets/           # Static assets (images, fonts, icons)
+├── components/       # Reusable UI components
+├── config/          # Configuration files
+├── context/         # React Context providers
+├── errorBoundary/   # Error boundary components
+├── features/        # Feature-based modules
+├── hoc/            # Higher-order components
+├── hooks/          # Custom React hooks
+├── i18n/           # Internationalization
+├── layouts/        # Page layouts
+├── locales/        # Translation files
+├── middlewares/    # Custom middlewares
+├── pages/          # Page components
+├── routes/         # Routing configuration
+├── services/       # API services
+├── store/          # State management
+├── styles/         # Global styles
+├── theme/          # UI theme configuration
+├── tests/          # Test utilities
+├── types/          # TypeScript type definitions
+└── utils/          # Utility functions
+```
 
-### `npm run eject`
+## 🛠 Technology Stack
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- **Frontend**: React 18+ with TypeScript
+- **State Management**: Redux Toolkit + React Query
+- **Routing**: React Router v6
+- **UI Framework**: Material-UI (MUI)
+- **Styling**: Emotion + MUI ThemeProvider
+- **Forms**: Formik + Yup
+- **Testing**: Jest + React Testing Library
+- **Build Tool**: Webpack 5 (via Create React App)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 📜 Available Scripts
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- `npm start` - Start development server
+- `npm build` - Build for production
+- `npm test` - Run tests
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Fix ESLint issues
+- `npm run format` - Format code with Prettier
+- `npm run type-check` - Run TypeScript type checking
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 🌟 Features
 
-## Learn More
+- ✅ TypeScript with strict mode
+- ✅ Component-based architecture
+- ✅ State management with Redux Toolkit
+- ✅ Server state with React Query
+- ✅ Internationalization ready
+- ✅ Accessibility (WCAG 2.1 AA)
+- ✅ Performance optimization
+- ✅ Error boundaries
+- ✅ Code splitting
+- ✅ SEO optimization
+- ✅ PWA ready
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🚦 Development Workflow
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Create feature branch from `develop`
+2. Implement changes with tests
+3. Run linting and type checking
+4. Create pull request
+5. Code review and merge
+
+## 📝 Contributing
+
+Please read [CONTRIBUTING.md] for details on our code of conduct and development process.
+
+## 📄 License
+
+This project is licensed under the MIT License - see [LICENSE.md] for details.
