@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "target": "ES2020",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -19,6 +15,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
     "baseUrl": "src",
     "paths": {
       "@/*": ["*"],
@@ -31,20 +30,23 @@
       "@/config/*": ["config/*"],
       "@/assets/*": ["assets/*"],
       "@/styles/*": ["styles/*"],
-      "@/store/*": ["store/*"]
+      "@/store/*": ["store/*"],
+      "@/context/*": ["context/*"],
+      "@/layouts/*": ["layouts/*"],
+      "@/pages/*": ["pages/*"],
+      "@/routes/*": ["routes/*"],
+      "@/theme/*": ["theme/*"],
+      "@/i18n/*": ["i18n/*"],
+      "@/locales/*": ["locales/*"],
+      "@/tests/*": ["tests/*"]
     },
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "exactOptionalPropertyTypes": true,
     "noImplicitReturns": true,
-    "noImplicitOverride": true
+    "noImplicitOverride": true,
+    "noUncheckedIndexedAccess": true
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules",
-    "build",
-    "dist"
-  ]
+  "include": ["src/**/*", "src/**/*.json"],
+  "exclude": ["node_modules", "build", "dist", "coverage", "public"]
 }

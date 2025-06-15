@@ -1,0 +1,8 @@
+build/
+coverage/
+node_modules/
+public/
+*.config.js
+*.config.ts
+reportWebVitals.ts
+react-app-env.d.ts
