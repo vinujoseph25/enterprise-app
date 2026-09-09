@@ -1,25 +1,46 @@
 # Enterprise React Platform
 
-A production-oriented React + TypeScript reference architecture for building scalable enterprise web applications.
+A production-oriented React + TypeScript reference architecture for scalable enterprise web applications.
 
-This project focuses on the engineering concerns that become important as a frontend grows beyond a single-page prototype: feature boundaries, predictable state management, server-state caching, reusable UI, data-heavy screens, internationalisation, observability, testing, security hygiene, and deployment readiness.
+This repository demonstrates how I approach frontend systems that need to remain maintainable as teams, features, data volumes and operational requirements grow.
 
-> **Portfolio note:** This repository is intentionally an architecture-focused reference implementation. The goal is to demonstrate how I approach frontend architecture and engineering quality rather than present a generic starter template.
+## Architecture at a glance
+
+```text
+Routes / Pages
+      ↓
+Feature modules
+      ↓
+UI + domain orchestration
+      ↓
+Client state      Server state
+Redux Toolkit     TanStack Query
+      ↓                 ↓
+        Service / API boundary
+                 ↓
+          External systems
+```
+
+The implementation separates **business features, presentation, client state, server state, service integration and cross-cutting concerns**. The intention is to demonstrate architectural judgement rather than produce another generic React starter.
+
+See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the architectural decisions, trade-offs, testing strategy, performance approach and delivery model.
 
 ## What this demonstrates
 
-- **Feature-oriented architecture** for keeping business capabilities isolated and maintainable
-- **Type-safe React development** with TypeScript
-- **Redux Toolkit + TanStack Query** for client and server state separation
-- **Enterprise UI patterns** with MUI and AG Grid
-- **Data visualisation** with Recharts, D3 and ECharts where appropriate
-- **Reusable hooks, services and utilities** to reduce coupling
-- **Error boundaries and defensive UI patterns** for resilient experiences
-- **Internationalisation-ready structure** using i18next
-- **Testing and mocking** with Jest, React Testing Library and MSW
-- **Code quality automation** with ESLint, Prettier, Husky and commit conventions
-- **Container and deployment support** with Docker and CI/CD configuration
-- **Performance-minded patterns** including code splitting, virtualisation and bundle analysis
+- Feature-oriented React architecture for scalable teams
+- Strict TypeScript and explicit domain models
+- Redux Toolkit for client/application state
+- TanStack Query for server state, caching and request lifecycle
+- Reusable UI, hooks, services and utilities
+- Enterprise data-grid and dashboard patterns
+- Error boundaries, loading states and defensive UI
+- Internationalisation-ready structure
+- Unit and component testing with Jest and React Testing Library
+- Mockable service boundaries for integration testing
+- Code quality automation with ESLint, Prettier, Husky and commit conventions
+- Docker and CI/CD-oriented delivery structure
+- Performance practices including code splitting, virtualisation and bundle analysis
+- Security-conscious environment configuration
 
 ## Architecture
 
@@ -42,8 +63,6 @@ src/
 └── utils/           # Pure utility functions
 ```
 
-The architecture deliberately separates **UI, business features, application state, server communication and cross-cutting concerns**. This makes it easier to scale teams and functionality without turning the codebase into a tightly coupled component collection.
-
 ## Technology stack
 
 | Area | Technologies |
@@ -64,25 +83,25 @@ The architecture deliberately separates **UI, business features, application sta
 
 ## Engineering principles
 
-### 1. Separate server state from client state
+### Separate server state from client state
 
-API data belongs to TanStack Query, while local application state and UI state can be managed with Redux Toolkit or component state. This avoids using a single state mechanism for unrelated concerns.
+Remote data belongs behind the server-state boundary; global client state is reserved for application concerns that genuinely need it. Local UI state stays local where possible.
 
-### 2. Organise around features
+### Organise around business capabilities
 
-Business capabilities should own their components, hooks, services, types and state where practical. Shared code belongs in shared layers rather than being duplicated across features.
+Features own domain-specific behaviour. Shared layers contain genuinely reusable capabilities rather than becoming a dumping ground for unrelated code.
 
-### 3. Keep components composable
+### Keep boundaries explicit
 
-Presentation components should remain reusable and focused. Domain-specific orchestration belongs closer to feature and page boundaries.
+Pages orchestrate. Features express business workflows. Components render. Services communicate with external systems. This makes dependencies easier to reason about and test.
 
-### 4. Treat quality as part of development
+### Design for failure
 
-Linting, formatting, type checking, automated tests and pre-commit validation are part of the development workflow rather than after-the-fact cleanup.
+Loading, empty, error and unexpected-render states are first-class UI states. Production systems should additionally distinguish retryable failures from user-actionable failures.
 
-### 5. Design for production concerns early
+### Make quality part of delivery
 
-The project includes patterns for error handling, observability, accessibility, performance analysis, environment configuration and containerised delivery so those concerns do not become late-stage rewrites.
+Type checking, linting, formatting, tests and security checks belong in the development and delivery workflow rather than being postponed until release.
 
 ## Getting started
 
@@ -102,8 +121,6 @@ cp .env.local.example .env.local
 npm start
 ```
 
-The application starts on the default Create React App development port.
-
 ### Useful commands
 
 ```bash
@@ -118,19 +135,13 @@ npm run security:audit    # Dependency audit
 npm run build:analyze     # Bundle analysis
 ```
 
-## Environment configuration
+## Portfolio context
 
-Environment-specific values should remain outside version control. Use `.env.local.example` as the public template and create a local `.env.local` for machine-specific settings.
+This is the flagship frontend-architecture project in my portfolio. It complements the broader software-engineering showcase and my data/ML portfolio by focusing specifically on **enterprise React architecture, scalable frontend systems, engineering quality and production-minded design**.
 
-Never commit API keys, credentials, tokens, private endpoints or production secrets.
+## Security
 
-## Delivery
-
-The repository contains Docker and CI/CD configuration intended to demonstrate production delivery practices. Deployment configuration should be adapted to the target hosting environment rather than treated as a one-size-fits-all platform.
-
-## Portfolio focus
-
-This repository is part of my engineering portfolio and complements projects demonstrating data science, analytics and application engineering. It is intended to show practical experience with **enterprise frontend architecture, scalable React applications, engineering quality and production-minded development**.
+Never commit API keys, credentials, tokens, private endpoints or production secrets. Use `.env.local.example` as the public configuration contract and keep real values in local or deployment secret stores.
 
 ## License
 
