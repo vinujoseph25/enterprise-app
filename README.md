@@ -1,10 +1,14 @@
 # Enterprise React Platform
 
-A production-oriented React + TypeScript reference architecture for scalable enterprise web applications.
+> A production-minded React + TypeScript reference architecture for scalable enterprise web applications.
 
-This repository demonstrates how I approach frontend systems that need to remain maintainable as teams, features, data volumes and operational requirements grow.
+The **Enterprise React Platform** is the flagship frontend architecture project in my portfolio. It demonstrates how I structure a large React application so that features, state, service integrations, testing and cross-cutting concerns remain understandable as the system and engineering team grow.
 
-## Architecture at a glance
+## Why this project exists
+
+Enterprise frontends become difficult to maintain when business features, UI concerns, API calls and global state become tightly coupled. This project explores a more deliberate approach built around explicit boundaries, typed contracts and production-oriented engineering practices.
+
+## Architecture
 
 ```text
 Routes / Pages
@@ -13,62 +17,43 @@ Feature modules
       ↓
 UI + domain orchestration
       ↓
-Client state      Server state
-Redux Toolkit     TanStack Query
-      ↓                 ↓
-        Service / API boundary
-                 ↓
-          External systems
+┌───────────────────┬───────────────────┐
+│ Client state      │ Server state       │
+│ Redux Toolkit     │ TanStack Query     │
+└───────────────────┴───────────────────┘
+      ↓
+Service / API boundary
+      ↓
+External systems
 ```
 
-The implementation separates **business features, presentation, client state, server state, service integration and cross-cutting concerns**. The intention is to demonstrate architectural judgement rather than produce another generic React starter.
+The implementation separates **business features, presentation, client state, server state, service integration and cross-cutting concerns**. The goal is to demonstrate architectural judgement rather than provide another generic React starter.
 
-See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the architectural decisions, trade-offs, testing strategy, performance approach and delivery model.
+See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for deeper architectural decisions and trade-offs.
 
-## What this demonstrates
+## Engineering capabilities demonstrated
 
-- Feature-oriented React architecture for scalable teams
+- Feature-oriented React architecture
 - Strict TypeScript and explicit domain models
-- Redux Toolkit for client/application state
-- TanStack Query for server state, caching and request lifecycle
-- Reusable UI, hooks, services and utilities
-- Enterprise data-grid and dashboard patterns
-- Error boundaries, loading states and defensive UI
+- Redux Toolkit for application/client state
+- TanStack Query for server state and request lifecycle
+- Reusable components, hooks, services and utilities
+- Enterprise dashboard and data-grid patterns
+- Loading, empty, error and defensive UI states
 - Internationalisation-ready structure
-- Unit and component testing with Jest and React Testing Library
-- Mockable service boundaries for integration testing
-- Code quality automation with ESLint, Prettier, Husky and commit conventions
-- Docker and CI/CD-oriented delivery structure
-- Performance practices including code splitting, virtualisation and bundle analysis
+- Unit and component testing
+- Mockable service boundaries
+- Linting, formatting and commit-quality automation
+- Docker and CI/CD-oriented delivery
+- Performance-conscious patterns such as code splitting and virtualisation
 - Security-conscious environment configuration
-
-## Architecture
-
-```text
-src/
-├── assets/          # Application assets
-├── components/      # Reusable presentation components
-├── config/          # Runtime and application configuration
-├── context/         # Cross-cutting React providers
-├── errorBoundary/   # Resilience and error handling
-├── features/        # Business capabilities / feature modules
-├── hooks/           # Shared custom hooks
-├── layouts/         # Application layouts
-├── locales/         # Translation resources
-├── middlewares/     # Cross-cutting middleware
-├── pages/           # Route-level screens
-├── services/        # API and external service integrations
-├── store/           # Redux state and slices
-├── types/           # Shared TypeScript types
-└── utils/           # Pure utility functions
-```
 
 ## Technology stack
 
 | Area | Technologies |
 | --- | --- |
 | UI | React, TypeScript, MUI |
-| Client state | Redux Toolkit, React Redux |
+| State | Redux Toolkit, React Redux |
 | Server state | TanStack Query |
 | Routing | React Router |
 | Data grids | AG Grid, MUI X Data Grid |
@@ -81,27 +66,48 @@ src/
 | Observability | Sentry, PostHog, Web Vitals |
 | Delivery | Docker, Nginx, GitHub Actions |
 
-## Engineering principles
+## Project structure
 
-### Separate server state from client state
+```text
+src/
+├── assets/          # Application assets
+├── components/      # Shared presentation components
+├── config/          # Runtime/application configuration
+├── context/         # Cross-cutting providers
+├── errorBoundary/   # Resilience and error handling
+├── features/        # Business capabilities
+├── hooks/           # Shared custom hooks
+├── layouts/         # Application layouts
+├── locales/         # Translation resources
+├── middlewares/     # Cross-cutting middleware
+├── pages/           # Route-level screens
+├── services/        # API/external integrations
+├── store/           # Redux store and slices
+├── types/           # Shared TypeScript types
+└── utils/           # Pure utilities
+```
 
-Remote data belongs behind the server-state boundary; global client state is reserved for application concerns that genuinely need it. Local UI state stays local where possible.
+## Architectural principles
 
-### Organise around business capabilities
+### 1. Separate server state from client state
 
-Features own domain-specific behaviour. Shared layers contain genuinely reusable capabilities rather than becoming a dumping ground for unrelated code.
+Remote data belongs behind the server-state boundary. Global client state is reserved for application concerns that genuinely need it, while local UI state remains local where practical.
 
-### Keep boundaries explicit
+### 2. Organise around business capabilities
 
-Pages orchestrate. Features express business workflows. Components render. Services communicate with external systems. This makes dependencies easier to reason about and test.
+Feature modules own domain-specific behaviour. Shared layers contain capabilities that are genuinely reusable rather than becoming a dumping ground for unrelated code.
 
-### Design for failure
+### 3. Keep boundaries explicit
 
-Loading, empty, error and unexpected-render states are first-class UI states. Production systems should additionally distinguish retryable failures from user-actionable failures.
+Pages orchestrate. Features express workflows. Components render. Services communicate with external systems. Explicit boundaries make dependencies easier to reason about and test.
 
-### Make quality part of delivery
+### 4. Design for failure
 
-Type checking, linting, formatting, tests and security checks belong in the development and delivery workflow rather than being postponed until release.
+Loading, empty, error and unexpected-render states are treated as part of the feature rather than as afterthoughts.
+
+### 5. Make quality part of delivery
+
+Type checking, linting, formatting and tests belong in the development workflow and should be automated wherever possible.
 
 ## Getting started
 
@@ -124,24 +130,24 @@ npm start
 ### Useful commands
 
 ```bash
-npm start                 # Development server
-npm run build             # Production build
-npm run type-check        # TypeScript validation
-npm test                  # Test suite
-npm run test:coverage     # Coverage report
-npm run lint              # ESLint validation
-npm run format:check      # Prettier validation
-npm run security:audit    # Dependency audit
-npm run build:analyze     # Bundle analysis
+npm start
+npm run build
+npm run type-check
+npm test
+npm run test:coverage
+npm run lint
+npm run format:check
+npm run security:audit
+npm run build:analyze
 ```
 
-## Portfolio context
+## Portfolio role
 
-This is the flagship frontend-architecture project in my portfolio. It complements the broader software-engineering showcase and my data/ML portfolio by focusing specifically on **enterprise React architecture, scalable frontend systems, engineering quality and production-minded design**.
+This is the **flagship frontend architecture case study** in my portfolio. It complements the broader Software Engineering Portfolio and the Data Analysis Portfolio by focusing specifically on scalable React systems, architecture, engineering quality and production-minded design.
 
 ## Security
 
-Never commit API keys, credentials, tokens, private endpoints or production secrets. Use `.env.local.example` as the public configuration contract and keep real values in local or deployment secret stores.
+Never commit API keys, credentials, tokens or production secrets. Use `.env.local.example` as the public configuration contract and keep real values in local or deployment secret stores.
 
 ## License
 
