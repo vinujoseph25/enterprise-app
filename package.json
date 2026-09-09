@@ -1,27 +1,28 @@
 {
-  "name": "enterprise-react-app",
+  "name": "enterprise-react-platform",
   "version": "1.0.0",
   "private": true,
-  "description": "Enterprise-grade React application with TypeScript, Redux, MUI, and comprehensive tooling",
+  "description": "Production-oriented React and TypeScript reference architecture for scalable enterprise web applications",
   "keywords": [
     "react",
     "typescript",
-    "enterprise",
+    "enterprise-frontend",
+    "frontend-architecture",
     "redux-toolkit",
+    "tanstack-query",
     "mui",
-    "react-query",
-    "i18n",
-    "accessibility"
+    "accessibility",
+    "testing"
   ],
-  "author": "Your Company <dev@yourcompany.com>",
+  "author": "Vinu Joseph",
   "license": "MIT",
   "homepage": ".",
   "bugs": {
-    "url": "https://github.com/your-org/enterprise-react-app/issues"
+    "url": "https://github.com/vinujoseph25/enterprise-app/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-org/enterprise-react-app.git"
+    "url": "git+https://github.com/vinujoseph25/enterprise-app.git"
   },
   "engines": {
     "node": ">=18.0.0",
@@ -109,7 +110,7 @@
     "husky": "^8.0.3",
     "jest-environment-jsdom": "^29.7.0",
     "jest-sonar-reporter": "^2.0.0",
-    "lint-staged": "^15.2.0",
+    "lint-staged": "^15.2.1",
     "mini-css-extract-plugin": "^2.7.6",
     "msw": "^2.0.11",
     "postcss": "^8.4.31",
@@ -171,8 +172,8 @@
     "commit": "npx git-cz",
     "start:webpack": "webpack serve --config webpack.dev.js",
     "build:webpack": "webpack --config webpack.prod.js",
-    "docker:build": "docker build -t enterprise-react-app .",
-    "docker:run": "docker run -p 3000:80 enterprise-react-app",
+    "docker:build": "docker build -t enterprise-react-platform .",
+    "docker:run": "docker run -p 3000:80 enterprise-react-platform",
     "docker:dev": "docker-compose -f docker-compose.dev.yml up",
     "docker:prod": "docker-compose up",
     "deploy:staging": "chmod +x scripts/deploy.sh && ./scripts/deploy.sh staging",
