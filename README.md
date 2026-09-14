@@ -1,70 +1,38 @@
 # Enterprise React Platform
 
-> A production-minded React + TypeScript reference architecture for scalable enterprise web applications.
+> A React + TypeScript project scaffold and tooling reference for scalable enterprise web applications — currently an early-stage architecture reference, not a finished product.
 
-The **Enterprise React Platform** is the flagship frontend architecture project in my portfolio. It demonstrates how I structure a large React application so that features, state, service integrations, testing and cross-cutting concerns remain understandable as the system and engineering team grow.
+The **Enterprise React Platform** is where I'm working out how I'd structure a large React application so that build tooling, delivery pipeline, and engineering quality gates are production-grade from day one — before layering on business features.
 
-## Why this project exists
+## Status: early-stage scaffold
 
-Enterprise frontends become difficult to maintain when business features, UI concerns, API calls and global state become tightly coupled. This project explores a more deliberate approach built around explicit boundaries, typed contracts and production-oriented engineering practices.
+Be upfront about where this actually is: the build system, CI/CD, tooling, and delivery setup below are real and working. The application layer is currently a single mock dashboard built with plain React state — none of the richer client/server-state stack (Redux Toolkit, TanStack Query, AG Grid, D3, i18next, Sentry) is wired into working features yet. Those libraries are declared as dependencies and documented as the intended architecture (see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)), but that document describes a plan, not what's currently implemented.
 
-## Architecture
+## What's actually built
 
-```text
-Routes / Pages
-      ↓
-Feature modules
-      ↓
-UI + domain orchestration
-      ↓
-┌───────────────────┬───────────────────┐
-│ Client state      │ Server state       │
-│ Redux Toolkit     │ TanStack Query     │
-└───────────────────┴───────────────────┘
-      ↓
-Service / API boundary
-      ↓
-External systems
-```
+- Full webpack build pipeline (dev/prod configs, custom chunk-analysis and optimization plugins, bundle analysis tooling)
+- Docker + Nginx delivery setup, with dev and prod compose files
+- GitHub Actions CI workflow, plus a separate Dependabot workflow
+- ESLint, Prettier, Husky pre-commit/pre-push hooks, Commitlint with conventional-commit enforcement
+- Jest + React Testing Library configured, with a coverage threshold set (70%)
+- A documented folder structure and architectural plan (`docs/ARCHITECTURE.md`, `docs/CODE_SPLITTING_GUIDE.md`) for how features, state, and services are meant to be organised as the app grows
+- One working feature: a mock operational dashboard (`src/features/dashboard`) rendering static service-health data through plain `useState`/`useEffect` and a typed service boundary (`platformService.ts`)
 
-The implementation separates **business features, presentation, client state, server state, service integration and cross-cutting concerns**. The goal is to demonstrate architectural judgement rather than provide another generic React starter.
+## What's planned, not yet implemented
 
-See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for deeper architectural decisions and trade-offs.
+The dependency list below reflects the intended stack — none of it is wired into `src/` yet:
 
-## Engineering capabilities demonstrated
-
-- Feature-oriented React architecture
-- Strict TypeScript and explicit domain models
-- Redux Toolkit for application/client state
-- TanStack Query for server state and request lifecycle
-- Reusable components, hooks, services and utilities
-- Enterprise dashboard and data-grid patterns
-- Loading, empty, error and defensive UI states
-- Internationalisation-ready structure
-- Unit and component testing
-- Mockable service boundaries
-- Linting, formatting and commit-quality automation
-- Docker and CI/CD-oriented delivery
-- Performance-conscious patterns such as code splitting and virtualisation
-- Security-conscious environment configuration
-
-## Technology stack
-
-| Area | Technologies |
+| Area | Planned technology |
 | --- | --- |
-| UI | React, TypeScript, MUI |
-| State | Redux Toolkit, React Redux |
+| Client state | Redux Toolkit |
 | Server state | TanStack Query |
-| Routing | React Router |
 | Data grids | AG Grid, MUI X Data Grid |
 | Visualisation | Recharts, D3, Apache ECharts |
 | Forms | Formik, Yup |
 | Internationalisation | i18next, react-i18next |
-| Testing | Jest, React Testing Library, MSW |
-| Quality | ESLint, Prettier, Husky, Commitlint |
-| Performance | React Window, bundle analysis, code splitting |
-| Observability | Sentry, PostHog, Web Vitals |
-| Delivery | Docker, Nginx, GitHub Actions |
+| Observability | Sentry, PostHog |
+
+Most `src/` feature folders (`auth`, `profile`, `store/slices`, `services/api`, `locales`, etc.) exist as placeholders (`.gitkeep`) rather than implemented code.
 
 ## Project structure
 
@@ -75,7 +43,7 @@ src/
 ├── config/          # Runtime/application configuration
 ├── context/         # Cross-cutting providers
 ├── errorBoundary/   # Resilience and error handling
-├── features/        # Business capabilities
+├── features/        # Business capabilities (dashboard implemented; others are placeholders)
 ├── hooks/           # Shared custom hooks
 ├── layouts/         # Application layouts
 ├── locales/         # Translation resources
@@ -86,28 +54,6 @@ src/
 ├── types/           # Shared TypeScript types
 └── utils/           # Pure utilities
 ```
-
-## Architectural principles
-
-### 1. Separate server state from client state
-
-Remote data belongs behind the server-state boundary. Global client state is reserved for application concerns that genuinely need it, while local UI state remains local where practical.
-
-### 2. Organise around business capabilities
-
-Feature modules own domain-specific behaviour. Shared layers contain capabilities that are genuinely reusable rather than becoming a dumping ground for unrelated code.
-
-### 3. Keep boundaries explicit
-
-Pages orchestrate. Features express workflows. Components render. Services communicate with external systems. Explicit boundaries make dependencies easier to reason about and test.
-
-### 4. Design for failure
-
-Loading, empty, error and unexpected-render states are treated as part of the feature rather than as afterthoughts.
-
-### 5. Make quality part of delivery
-
-Type checking, linting, formatting and tests belong in the development workflow and should be automated wherever possible.
 
 ## Getting started
 
@@ -141,13 +87,13 @@ npm run security:audit
 npm run build:analyze
 ```
 
-## Portfolio role
+## Why this project exists
 
-This is the **flagship frontend architecture case study** in my portfolio. It complements the broader Software Engineering Portfolio and the Data Analysis Portfolio by focusing specifically on scalable React systems, architecture, engineering quality and production-minded design.
+Enterprise frontends become hard to maintain when features, UI, API calls, and global state are tightly coupled. Before writing more features, I wanted the build, delivery, and quality tooling to already reflect how I'd want a real team to work — explicit boundaries, typed contracts, and automated quality gates. That tooling foundation is what's built out here now; the feature layer is next.
 
 ## Security
 
-Never commit API keys, credentials, tokens or production secrets. Use `.env.local.example` as the public configuration contract and keep real values in local or deployment secret stores.
+Never commit API keys, credentials, tokens, or production secrets. Use `.env.local.example` as the public configuration contract and keep real values in local or deployment secret stores.
 
 ## License
 
