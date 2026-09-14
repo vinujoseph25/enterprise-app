@@ -1,5 +1,7 @@
 # Enterprise React Platform — Architecture Notes
 
+> **Status:** This document describes the intended architecture. Redux Toolkit and TanStack Query are not yet wired into the app — the only implemented feature (`src/features/dashboard`) uses plain React state. See the README's "What's actually built" section for the current state.
+
 ## Purpose
 
 This document explains the architectural decisions demonstrated by the Enterprise React Platform. It is deliberately focused on maintainability, team scalability, resilience and production readiness rather than framework features for their own sake.
